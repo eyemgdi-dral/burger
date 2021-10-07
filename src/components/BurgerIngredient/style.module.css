@@ -1,0 +1,25 @@
+.seed {
+  width: 10%;
+  height: 10%;
+  background-color: brown;
+  border-radius: 50% 50%;
+  position: absolute;
+
+  top: 50%;
+  left: 10%;
+}
+.seed.second {
+  left: 30%;
+  top: 30%;
+  transform: rotate(30deg);
+}
+.seed.third {
+  left: 60%;
+  top: 60%;
+  transform: rotate(60deg);
+}
+.seed.fourth {
+  left: 80%;
+  top: 60%;
+  transform: rotate(140deg);
+}
