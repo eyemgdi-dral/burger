@@ -1,6 +1,6 @@
 export const BurgerControl = (props) => (
   <div>
-    {props.type}
+    {props.ingredientNames[props.type]}
     <button onClick={() => props.incIngredient(props.type)}>+</button>
     <button
       onClick={() => props.decIngredient(props.type)}

@@ -1,6 +1,15 @@
+import { Shadow } from "../Shadow";
 import "./style.css";
-export const Modal = (props) => (
-  <div className="Modal">
-    <div className="content">{props.children}</div>
-  </div>
-);
+export const Modal = (props) => {
+  return (
+    <div>
+      <Shadow
+        show={props.showModal}
+        hideConfirmOrder={props.hideConfirmOrder}
+      />
+      <div className={`Modal ${props.showModal ? "show" : "hide"}`}>
+        <div className="content">{props.children}</div>
+      </div>
+    </div>
+  );
+};

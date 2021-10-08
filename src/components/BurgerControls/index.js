@@ -1,18 +1,13 @@
 import { BurgerControl } from "../BurgerControl";
 export const BurgerControls = (props) => {
-  const controls = {
-    bacon: "Gahai",
-    meat: "Uher",
-    salad: "salad",
-    cheese: "cheese",
-  };
   return (
     <div>
       <h1>Total: {props.totalPrice}</h1>
-      {Object.keys(controls).map((control, index) => {
+      {Object.keys(props.ingredientNames).map((control, index) => {
         return (
           <BurgerControl
-            keys={index}
+            key={index}
+            ingredientNames={props.ingredientNames}
             incIngredient={props.incIngredient}
             decIngredient={props.decIngredient}
             disIngredients={props.disIngredients}
@@ -20,7 +15,7 @@ export const BurgerControls = (props) => {
           ></BurgerControl>
         );
       })}
-      <button>Order</button>
+      <button onClick={props.showConfirmOrder}>Order</button>
     </div>
   );
 };
