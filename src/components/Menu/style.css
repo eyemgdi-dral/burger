@@ -1,0 +1,35 @@
+.Menu {
+  list-style: none;
+}
+.MenuItem a {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  color: white;
+  text-decoration: none;
+}
+.MenuItem a.active,
+.MenuItem a:hover,
+.MenuItem a:active {
+  color: blue;
+}
+@media (min-width: 500px) {
+  .Menu {
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    align-items: center;
+  }
+  .MenuItem {
+    display: flex;
+    align-items: center;
+  }
+  .MenuItem a {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    color: white;
+    text-decoration: none;
+  }
+} ;

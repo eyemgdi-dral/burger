@@ -1,4 +1,12 @@
-export const OrderSummary = ({ ingredients, ingredientNames, totalPrice }) => (
+import { Button } from "../General/Button";
+
+export const OrderSummary = ({
+  ingredients,
+  ingredientNames,
+  totalPrice,
+  onCancel,
+  onContinue,
+}) => (
   <div>
     <div>Your ingredients</div>
     <h1>{totalPrice}</h1>
@@ -9,6 +17,8 @@ export const OrderSummary = ({ ingredients, ingredientNames, totalPrice }) => (
         </li>
       ))}
     </ul>
-    <button>Proceed</button>
+    <p>Do you want to proceed?</p>
+    <Button clicked={onCancel} name="Cancel"></Button>
+    <Button clicked={onContinue} name="Proceed"></Button>
   </div>
 );

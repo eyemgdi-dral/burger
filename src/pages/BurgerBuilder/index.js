@@ -77,6 +77,8 @@ export class BurgerBuilder extends Component {
             ingredientNames={INGREDIENT_NAMES}
             ingredients={this.state.ingredients}
             totalPrice={this.state.totalPrice}
+            onCancel={this.hideConfirmOrder}
+            onContinue={this.hideConfirmOrder}
           ></OrderSummary>
         </Modal>
       </div>

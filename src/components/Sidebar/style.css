@@ -1,0 +1,10 @@
+.Sidebar {
+  position: fixed;
+  background: green;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  z-index: 200;
+  padding: 20px;
+}
