@@ -1,6 +1,10 @@
 .Menu {
   list-style: none;
 }
+.MenuItem {
+  display: block;
+  align-items: center;
+}
 .MenuItem a {
   display: flex;
   align-items: center;

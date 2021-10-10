@@ -1,4 +1,11 @@
+.Sidebar.open {
+  transform:translateX(0)
+}
+.Sidebar.close {
+  transform:translateX(-100%)
+}
 .Sidebar {
+  transition:.3s;
   position: fixed;
   background: green;
   top: 0;
@@ -7,4 +14,10 @@
   width: 250px;
   z-index: 200;
   padding: 20px;
+}
+
+@media (min-width: 500px){
+  .Sidebar{
+    display: none;
+  }
 }

@@ -1,10 +1,13 @@
 import { Logo } from "../General/Logo";
+import { Hamburger } from "../Hamburger";
 import { Menu } from "../Menu";
 import css from "./style.module.css";
-export const Toolbar = () => {
+export const Toolbar = (props) => {
   return (
     <header className={css.Toolbar}>
-      <div></div>
+      <div>
+        <Hamburger toggleSidebar={props.toggleSidebar} />
+      </div>
       <div>
         <Logo />
       </div>
