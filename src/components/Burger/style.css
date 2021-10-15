@@ -1,65 +1,65 @@
 .burger {
-  /* border: 1px solid black;  */
-  width: 100px;
-  height: 150px;
-  margin: auto;
+    /* border: 1px solid black;  */
+    width: 100px;
+    height: 150px;
+    margin: auto;
 }
 @media (min-width: 500px) {
-  .burger {
-    /* border: 1px solid black;  */
-    height: 100px;
-    width: 100px;
-    margin: auto;
-    text-align: center;
-  }
+    .burger {
+        /* border: 1px solid black;  */
+        height: 200px;
+        width: 100px;
+        margin: auto;
+        text-align: center;
+    }
 }
 
 .bread-top {
-  width: 80%;
-  background: linear-gradient(#bc581e, #e27b36);
-  border-radius: 50% 50% 0 0;
-  height: 20%;
-  margin: auto;
-  text-align: center;
-  position: relative;
+    width: 80%;
+    background: linear-gradient(#bc581e, #e27b36);
+    border-radius: 50% 50% 0 0;
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    position: relative;
 }
 .salad {
-  width: 85%;
-  background: linear-gradient(rgb(87, 199, 35), green);
-  height: 5%;
-  margin: 2% auto;
-  text-align: center;
-  border-radius: 20px;
+    width: 85%;
+    background: linear-gradient(rgb(87, 199, 35), green);
+    height: 5%;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 20px;
 }
 .meat {
-  width: 80%;
-  background-color: rgb(143, 52, 0);
-  height: 10%;
-  margin: 2% auto;
-  text-align: center;
-  border-radius: 20px;
+    width: 80%;
+    background-color: rgb(143, 52, 0);
+    height: 10%;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 20px;
 }
 .bacon {
-  width: 80%;
-  background-color: rgb(150, 55, 0);
-  height: 2%;
-  margin: 2% auto;
-  text-align: center;
-  border-radius: 20px;
+    width: 80%;
+    background-color: rgb(150, 55, 0);
+    height: 2%;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 20px;
 }
 .cheese {
-  width: 90%;
-  background-color: rgb(238, 255, 0);
-  height: 1%;
-  margin: 2% auto;
-  text-align: center;
-  border-radius: 20px;
+    width: 90%;
+    background-color: rgb(238, 255, 0);
+    height: 1%;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 20px;
 }
 .bread-bottom {
-  width: 80%;
-  background: linear-gradient(#bc581e, #e27b36);
-  height: 10%;
-  margin: auto;
-  border-radius: 0 0 20px 20px;
-  text-align: center;
+    width: 80%;
+    background: linear-gradient(#bc581e, #e27b36);
+    height: 10%;
+    margin: auto;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
 }

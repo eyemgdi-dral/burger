@@ -2,14 +2,16 @@ import { MenuItem } from "../MenuItem";
 import "./style.css";
 
 export const Menu = () => {
-  return (
-    <div>
-      <ul className="Menu">
-        {/* TIP: when passing boolean */}
-        <MenuItem name="Login" link="/login" />
-        <MenuItem name="Burger" link="/burgerbuilder" />
-        <MenuItem name="Checkout" link="/checkout" />
-      </ul>
-    </div>
-  );
+    return (
+        <div>
+            <ul className="Menu">
+                {/* TIP: when passing boolean */}
+                <MenuItem exact name="Home" link="/" />
+                <MenuItem exact name="Login" link="/login" />
+                <MenuItem exact name="Order" link="/order" />
+                <MenuItem exact name="Burger" link="/burgerbuilder" />
+                <MenuItem exact name="Checkout" link="/checkout" />
+            </ul>
+        </div>
+    );
 };
