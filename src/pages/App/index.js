@@ -12,12 +12,17 @@ import "./style.css";
 class App extends Component {
     state = {
         showSidebar: false,
+        favorite: "N/A",
     };
     //TIP: how to prevState sample
     toggleSidebar = () => {
         this.setState((prevState) => {
             return { showSidebar: !prevState.showSidebar };
         });
+    };
+    choose = (ingredients) => {
+        console.log("choose works", ingredients);
+        this.setState({ favorite: ingredients });
     };
     render() {
         return (
@@ -28,9 +33,14 @@ class App extends Component {
                     toggleSidebar={this.toggleSidebar}
                 />
                 <main className={css.Content}>
-                    <Route exact path="/" component={BurgerBuilder} />
+                    <p>Chosen Ingredient : {this.state.favorite}</p>
+                    <Route exact path="/">
+                        <BurgerBuilder choose={this.choose} />
+                    </Route>
                     <Route path="/order" component={OrderPage} />
-                    <Route path="/burgerbuilder" component={BurgerBuilder} />
+                    <Route path="/burgerbuilder">
+                        <BurgerBuilder choose={this.choose} />
+                    </Route>
                     <Route path="/orders/:id" component={OrderDetailPage} />
                     <Route path="/checkout" component={Checkout} />
                 </main>

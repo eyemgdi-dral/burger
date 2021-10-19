@@ -36,7 +36,7 @@ export class BurgerBuilder extends Component {
     }
 
     componentDidMount = () => {
-        this.getLastBurger();
+        // this.getLastBurger();
     };
 
     getLastBurger = () => {
@@ -69,34 +69,12 @@ export class BurgerBuilder extends Component {
             query.push(str);
         }
 
+        query.push("totalPrice=" + this.state.totalPrice);
+
         this.props.history.push({
             pathname: "/checkout",
             search: query.join("&"),
         });
-    };
-
-    proceedOrder = () => {
-        this.setState({ isLoading: true });
-        console.log("proceeding");
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            adress: {
-                name: "Saraa",
-                city: "UB",
-                street: "10r horoolol",
-            },
-        };
-        axios
-            .post(`/orders.json`, order)
-            .then((response) => {
-                console.log("response", response);
-                alert("Success");
-                this.hideConfirmOrder();
-            })
-            .finally(() => {
-                this.setState({ isLoading: false });
-            });
     };
 
     showConfirmOrder = () => {
@@ -126,13 +104,15 @@ export class BurgerBuilder extends Component {
         for (const key in disIngredients) {
             disIngredients[key] = disIngredients[key] <= 0;
         }
-
         return (
             <div>
                 {this.state.isLoading ? (
                     <Spinner />
                 ) : (
-                    <Burger ingredients={this.state.ingredients}></Burger>
+                    <Burger
+                        ingredients={this.state.ingredients}
+                        choose={this.props.choose}
+                    ></Burger>
                 )}
                 <BurgerControls
                     totalPrice={this.state.totalPrice}
