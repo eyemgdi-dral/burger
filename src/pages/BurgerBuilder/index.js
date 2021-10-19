@@ -1,10 +1,16 @@
 import { Component } from "react";
+import { connect } from "react-redux";
 import { Modal } from "../../components/General/Modal";
 import Burger from "../../components/Burger";
 import { BurgerControls } from "../../components/BurgerControls";
 import { OrderSummary } from "../../components/OrderSummary";
 import axios from "../../api/axiosInstance";
 import { Spinner } from "../../components/General/Spinner";
+import {
+    decIngredient,
+    incIngredient,
+} from "../../redux/actions/actionsBurger";
+
 // export const BurgerBuilder = () => {
 //   return <div>BurgerBuilder</div>;
 // };
@@ -18,7 +24,7 @@ const INGREDIENT_NAMES = {
 const API =
     "https://burger-f4559-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
-export class BurgerBuilder extends Component {
+class BurgerBuilder extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -64,12 +70,12 @@ export class BurgerBuilder extends Component {
     proceedToOrderPage = () => {
         this.hideConfirmOrder();
         let query = [];
-        for (const prop in this.state.ingredients) {
-            let str = prop + "=" + this.state.ingredients[prop];
+        for (const prop in this.props.ingredients) {
+            let str = prop + "=" + this.props.ingredients[prop];
             query.push(str);
         }
 
-        query.push("totalPrice=" + this.state.totalPrice);
+        query.push("totalPrice=" + this.props.totalPrice);
 
         this.props.history.push({
             pathname: "/checkout",
@@ -85,22 +91,22 @@ export class BurgerBuilder extends Component {
     };
 
     incIngredient = (type) => {
-        const newIngredient = { ...this.state.ingredients };
+        const newIngredient = { ...this.props.ingredients };
         newIngredient[type]++;
-        const newPrice = this.state.totalPrice + INGREDIENT_PRICES[type];
+        const newPrice = this.props.totalPrice + INGREDIENT_PRICES[type];
         this.setState({ ingredients: newIngredient, totalPrice: newPrice });
     };
     decIngredient = (type) => {
-        const newIngredient = { ...this.state.ingredients };
+        const newIngredient = { ...this.props.ingredients };
         if (newIngredient[type] > 0) {
             newIngredient[type]--;
         }
-        const newPrice = this.state.totalPrice - INGREDIENT_PRICES[type];
+        const newPrice = this.props.totalPrice - INGREDIENT_PRICES[type];
         this.setState({ ingredients: newIngredient, totalPrice: newPrice });
     };
 
     render() {
-        const disIngredients = { ...this.state.ingredients };
+        const disIngredients = { ...this.props.ingredients };
         for (const key in disIngredients) {
             disIngredients[key] = disIngredients[key] <= 0;
         }
@@ -110,15 +116,15 @@ export class BurgerBuilder extends Component {
                     <Spinner />
                 ) : (
                     <Burger
-                        ingredients={this.state.ingredients}
+                        ingredients={this.props.ingredients}
                         choose={this.props.choose}
                     ></Burger>
                 )}
                 <BurgerControls
-                    totalPrice={this.state.totalPrice}
+                    totalPrice={this.props.totalPrice}
                     disIngredients={disIngredients}
-                    incIngredient={this.incIngredient}
-                    decIngredient={this.decIngredient}
+                    incIngredient={this.props.incIngredient}
+                    decIngredient={this.props.decIngredient}
                     ingredientNames={INGREDIENT_NAMES}
                     showConfirmOrder={this.showConfirmOrder}
                 ></BurgerControls>
@@ -132,8 +138,8 @@ export class BurgerBuilder extends Component {
                     ) : (
                         <OrderSummary
                             ingredientNames={INGREDIENT_NAMES}
-                            ingredients={this.state.ingredients}
-                            totalPrice={this.state.totalPrice}
+                            ingredients={this.props.ingredients}
+                            totalPrice={this.props.totalPrice}
                             onCancel={this.hideConfirmOrder}
                             onContinue={this.proceedToOrderPage}
                         ></OrderSummary>
@@ -143,3 +149,20 @@ export class BurgerBuilder extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice,
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        incIngredient: (ingredientName) =>
+            dispatch(incIngredient(ingredientName)),
+        decIngredient: (ingredientName) =>
+            dispatch(decIngredient(ingredientName)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

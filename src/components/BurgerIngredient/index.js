@@ -13,9 +13,10 @@ export const BurgerIngredient = (prop) => {
         return <div className={prop.type}></div>;
     } else {
         return (
-            <div className={prop.type}>
-                <button onClick={() => prop.choose(prop.type)}>+</button>
-            </div>
+            <div
+                className={prop.type}
+                onClick={() => prop.choose(prop.type)}
+            ></div>
         );
     }
 };
