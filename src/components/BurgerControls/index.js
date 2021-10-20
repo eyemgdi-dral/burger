@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import {
-    decIngredient,
-    incIngredient,
-} from "../../redux/actions/actionsBurger";
-import { BurgerControl } from "../BurgerControl";
+import BurgerControl from "../BurgerControl";
 const BurgerControls = (props) => {
+    const disIngredients = { ...props.ingredients };
+    for (const key in disIngredients) {
+        disIngredients[key] = disIngredients[key] <= 0;
+    }
     return (
         <div>
             <h1>Total: {props.totalPrice}</h1>
@@ -12,10 +12,7 @@ const BurgerControls = (props) => {
                 return (
                     <BurgerControl
                         key={index}
-                        ingredientNames={props.ingredientNames}
-                        incIngredient={props.incIngredient}
-                        decIngredient={props.decIngredient}
-                        disIngredients={props.disIngredients}
+                        disIngredients={disIngredients}
                         type={control}
                     ></BurgerControl>
                 );
@@ -30,19 +27,12 @@ const BurgerControls = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapState = (state) => {
     return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice,
         ingredientNames: state.ingredientNames,
+        purchasing: state.purchasing,
     };
 };
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        incIngredient: (ingredientName) =>
-            dispatch(incIngredient(ingredientName)),
-        decIngredient: (ingredientName) =>
-            dispatch(decIngredient(ingredientName)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BurgerControls);
+export default connect(mapState)(BurgerControls);

@@ -37,5 +37,7 @@ const mapStateToProps = (state) => {
         ingredients: state.ingredients,
     };
 };
-const mapDispatchToProps = (dispatch) => {};
+const mapDispatchToProps = (dispatch) => {
+    return {};
+};
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Burger));

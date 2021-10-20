@@ -1,26 +1,18 @@
 import { Component } from "react";
-import { connect } from "react-redux";
 import { Modal } from "../../components/General/Modal";
 import Burger from "../../components/Burger";
 import BurgerControls from "../../components/BurgerControls";
-import { OrderSummary } from "../../components/OrderSummary";
+import OrderSummary from "../../components/OrderSummary";
 import axios from "../../api/axiosInstance";
 import { Spinner } from "../../components/General/Spinner";
-import {
-    decIngredient,
-    incIngredient,
-} from "../../redux/actions/actionsBurger";
+
+import { withRouter } from "react-router";
 
 // export const BurgerBuilder = () => {
 //   return <div>BurgerBuilder</div>;
 // };
 const INGREDIENT_PRICES = { salad: 150, cheese: 250, bacon: 800, meat: 1500 };
-const INGREDIENT_NAMES = {
-    bacon: "Гахайн мах",
-    meat: "Үхрийн мах",
-    salad: "Салад",
-    cheese: "Бяслага",
-};
+
 const API =
     "https://burger-f4559-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
@@ -36,6 +28,27 @@ class BurgerBuilder extends Component {
 
     componentDidMount = () => {
         // this.getLastBurger();
+    };
+
+    proceedToOrderPageOld = (ingredients, totalPrice) => {
+        this.hideConfirmOrder();
+        let query = [];
+        for (const prop in ingredients) {
+            let str = prop + "=" + ingredients[prop];
+            query.push(str);
+        }
+
+        query.push("totalPrice=" + totalPrice);
+
+        this.props.history.push({
+            pathname: "/checkout",
+            search: query.join("&"),
+        });
+        console.log("here and now");
+    };
+
+    proceedToOrderPage = () => {
+        this.props.history.push("/checkout");
     };
 
     getLastBurger = () => {
@@ -58,22 +71,6 @@ class BurgerBuilder extends Component {
             .finally(() => {
                 this.setState({ isLoading: false });
             });
-    };
-
-    proceedToOrderPage = () => {
-        this.hideConfirmOrder();
-        let query = [];
-        for (const prop in this.props.ingredients) {
-            let str = prop + "=" + this.props.ingredients[prop];
-            query.push(str);
-        }
-
-        query.push("totalPrice=" + this.props.totalPrice);
-
-        this.props.history.push({
-            pathname: "/checkout",
-            search: query.join("&"),
-        });
     };
 
     showConfirmOrder = () => {
@@ -99,10 +96,6 @@ class BurgerBuilder extends Component {
     };
 
     render() {
-        const disIngredients = { ...this.props.ingredients };
-        for (const key in disIngredients) {
-            disIngredients[key] = disIngredients[key] <= 0;
-        }
         return (
             <div>
                 {this.state.isLoading ? (
@@ -112,10 +105,7 @@ class BurgerBuilder extends Component {
                 )}
 
                 <BurgerControls
-                    totalPrice={this.props.totalPrice}
-                    disIngredients={disIngredients}
                     showConfirmOrder={this.showConfirmOrder}
-                    purchasing={this.props.purchasing}
                 ></BurgerControls>
                 <Modal
                     showModal={this.state.confirmOrder}
@@ -125,9 +115,6 @@ class BurgerBuilder extends Component {
                         <Spinner />
                     ) : (
                         <OrderSummary
-                            ingredientNames={INGREDIENT_NAMES}
-                            ingredients={this.props.ingredients}
-                            totalPrice={this.props.totalPrice}
                             onCancel={this.hideConfirmOrder}
                             onContinue={this.proceedToOrderPage}
                         ></OrderSummary>
@@ -138,20 +125,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice,
-        purchasing: state.purchasing,
-    };
-};
-const mapDispatchToProps = (dispatch) => {
-    return {
-        incIngredient: (ingredientName) =>
-            dispatch(incIngredient(ingredientName)),
-        decIngredient: (ingredientName) =>
-            dispatch(decIngredient(ingredientName)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
+export default withRouter(BurgerBuilder);
