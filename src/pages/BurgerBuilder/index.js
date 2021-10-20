@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Modal } from "../../components/General/Modal";
 import Burger from "../../components/Burger";
-import { BurgerControls } from "../../components/BurgerControls";
+import BurgerControls from "../../components/BurgerControls";
 import { OrderSummary } from "../../components/OrderSummary";
 import axios from "../../api/axiosInstance";
 import { Spinner } from "../../components/General/Spinner";
@@ -28,13 +28,6 @@ class BurgerBuilder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients: {
-                salad: 0,
-                cheese: 0,
-                bacon: 0,
-                meat: 0,
-            },
-            totalPrice: 0,
             purchasing: false,
             confirmOrder: false,
             isLoading: false,
@@ -115,20 +108,15 @@ class BurgerBuilder extends Component {
                 {this.state.isLoading ? (
                     <Spinner />
                 ) : (
-                    <Burger
-                        ingredients={this.props.ingredients}
-                        choose={this.props.choose}
-                    ></Burger>
+                    <Burger choose={this.props.choose}></Burger>
                 )}
+
                 <BurgerControls
                     totalPrice={this.props.totalPrice}
                     disIngredients={disIngredients}
-                    incIngredient={this.props.incIngredient}
-                    decIngredient={this.props.decIngredient}
-                    ingredientNames={INGREDIENT_NAMES}
                     showConfirmOrder={this.showConfirmOrder}
+                    purchasing={this.props.purchasing}
                 ></BurgerControls>
-
                 <Modal
                     showModal={this.state.confirmOrder}
                     hideConfirmOrder={this.hideConfirmOrder}
@@ -154,6 +142,7 @@ const mapStateToProps = (state) => {
     return {
         ingredients: state.ingredients,
         totalPrice: state.totalPrice,
+        purchasing: state.purchasing,
     };
 };
 const mapDispatchToProps = (dispatch) => {
