@@ -19,7 +19,7 @@ const BurgerControl = (props) => (
 
 const mapStateToProp = (state) => {
     return {
-        ingredientNames: state.ingredientNames,
+        ingredientNames: state.reducerBurger.ingredientNames,
     };
 };
 const mapDispatchToProp = (dispatch) => {

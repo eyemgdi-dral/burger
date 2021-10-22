@@ -29,10 +29,10 @@ const BurgerControls = (props) => {
 
 const mapState = (state) => {
     return {
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice,
-        ingredientNames: state.ingredientNames,
-        purchasing: state.purchasing,
+        ingredients: state.reducerBurger.ingredients,
+        totalPrice: state.reducerBurger.totalPrice,
+        ingredientNames: state.reducerBurger.ingredientNames,
+        purchasing: state.reducerBurger.purchasing,
     };
 };
 export default connect(mapState)(BurgerControls);

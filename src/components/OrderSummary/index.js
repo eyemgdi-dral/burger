@@ -25,11 +25,11 @@ const OrderSummary = ({
         </div>
     );
 };
-const a = (state) => {
+const mapStateToProps = (state) => {
     return {
-        ingredientNames: state.ingredientNames,
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice,
+        ingredientNames: state.reducerBurger.ingredientNames,
+        ingredients: state.reducerBurger.ingredients,
+        totalPrice: state.reducerBurger.totalPrice,
     };
 };
-export default connect(a)(OrderSummary);
+export default connect(mapStateToProps)(OrderSummary);

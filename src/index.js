@@ -4,11 +4,32 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import reducerBurger from "./redux/reducer/reducerBurger";
+import reducerOrder from "./redux/reducer/reducerOrder";
+import thunk from "redux-thunk";
 
-const store = createStore(reducerBurger);
+const logger = (store) => {
+    return (next) => {
+        return (action) => {
+            console.log("Log => dispatching ", action);
+            console.log("Log => current state before ", store.getState());
+            const result = next(action);
+            console.log("Log => current state after ", store.getState());
+
+            return result;
+        };
+    };
+};
+
+const reducers = combineReducers({ reducerBurger, reducerOrder });
+const middleWares = [logger, thunk];
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+    reducers,
+    composeEnhancers(applyMiddleware(...middleWares))
+);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -9,7 +9,12 @@
     text-align: left;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: stretch;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .order-list li .burger {
     margin: 0;

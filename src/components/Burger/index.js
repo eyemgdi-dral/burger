@@ -34,7 +34,7 @@ const Burger = (props) => {
 };
 const mapStateToProps = (state) => {
     return {
-        ingredients: state.ingredients,
+        ingredients: state.reducerBurger.ingredients,
     };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -4,25 +4,17 @@ import { Button } from "../../components/General/Button";
 import { Spinner } from "../../components/General/Spinner";
 import { withRouter } from "react-router";
 import "./style.css";
+import { connect } from "react-redux";
 
 class ContactPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients: {
-                salad: 0,
-                cheese: 0,
-                bacon: 0,
-                meat: 0,
-            },
+            name: "",
             name: "",
             city: "",
             street: "",
-            address: {
-                name: "",
-                city: "",
-                street: "",
-            },
+            isLoading: false,
         };
     }
     proceedOrder = () => {
@@ -34,9 +26,10 @@ class ContactPage extends Component {
         };
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.totalPrice,
+            totalPrice: this.props.totalPrice,
             address,
         };
+
         axiosInstance
             .post(`/orders.json`, order)
             .then((response) => {
@@ -86,4 +79,11 @@ class ContactPage extends Component {
     }
 }
 
-export default withRouter(ContactPage);
+const a = ({ reducerBurger }) => {
+    return {
+        ingredients: reducerBurger.ingredients,
+        totalPrice: reducerBurger.totalPrice,
+    };
+};
+
+export default connect(a)(withRouter(ContactPage));

@@ -5,26 +5,17 @@ import Burger from "../../components/Burger";
 import { Button } from "../../components/General/Button";
 import "./style.css";
 import axios from "../../api/axiosInstance";
+import { connect } from "react-redux";
 
-export class Checkout extends Component {
+class Checkout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients: {
-                salad: 0,
-                cheese: 0,
-                bacon: 0,
-                meat: 0,
-            },
-            totalPrice: 0,
             isLoading: false,
-            purchasing: false,
         };
     }
 
     componentDidMount() {
-        console.log("this.props.location.search", this.props);
-
         const query = new URLSearchParams(this.props.location.search);
         let ingredients = {};
         let totalPrice = 0;
@@ -48,17 +39,26 @@ export class Checkout extends Component {
     render() {
         return (
             <div>
-                <h3>{this.state.totalPrice}</h3>
-                <Burger ingredients={this.state.ingredients} />
+                <h3>{this.props.totalPrice}</h3>
+                <Burger />
                 <Button name="go back" clicked={this.goBack} />
                 <Button name="Contact" clicked={this.showContactData} />
                 <Route path="/checkout/contact">
                     <ContactPage
-                        ingredients={this.state.ingredients}
-                        totalPrice={this.state.totalPrice}
+                        ingredients={this.props.ingredients}
+                        totalPrice={this.props.totalPrice}
                     ></ContactPage>
                 </Route>
             </div>
         );
     }
 }
+
+const a = (state) => {
+    return {
+        totalPrice: state.totalPrice,
+        ingredients: state.ingredients,
+    };
+};
+
+export default connect(a)(Checkout);

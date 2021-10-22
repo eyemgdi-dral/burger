@@ -3,9 +3,9 @@ import { Route } from "react-router-dom";
 import { Sidebar } from "../../components/Sidebar";
 import { Toolbar } from "../../components/Toolbar";
 import BurgerBuilder from "../BurgerBuilder";
-import { Checkout } from "../Checkout";
+import Checkout from "../Checkout";
 import { OrderDetailPage } from "../OrderDetailPage";
-import { OrderPage } from "../OrderPage";
+import OrderPage from "../OrderPage";
 import css from "./style.module.css";
 import "./style.css";
 
