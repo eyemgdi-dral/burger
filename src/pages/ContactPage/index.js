@@ -5,6 +5,7 @@ import { Spinner } from "../../components/General/Spinner";
 import { withRouter } from "react-router";
 import "./style.css";
 import { connect } from "react-redux";
+import { proceedOrder } from "../../redux/actions/actionsOrder";
 
 class ContactPage extends Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class ContactPage extends Component {
         };
     }
     proceedOrder = () => {
-        this.setState({ isLoading: true });
         let address = {
             name: this.state.name,
             city: this.state.city,
@@ -30,15 +30,7 @@ class ContactPage extends Component {
             address,
         };
 
-        axiosInstance
-            .post(`/orders.json`, order)
-            .then((response) => {
-                alert("Success");
-            })
-            .finally(() => {
-                this.setState({ isLoading: false });
-                this.props.history.push("/");
-            });
+        this.props.proceedOrder(order);
     };
     onChangeName = (e) => {
         this.setState({ name: e.target.value });
@@ -69,7 +61,7 @@ class ContactPage extends Component {
                     placeholder="Your Street"
                     onChange={this.onChangeStreet}
                 />
-                {this.state.isLoading ? (
+                {this.props.isLoading ? (
                     <Spinner />
                 ) : (
                     <Button name="Purchase" clicked={this.proceedOrder} />
@@ -79,11 +71,20 @@ class ContactPage extends Component {
     }
 }
 
-const a = ({ reducerBurger }) => {
+const mapStateToProp = ({ reducerBurger }) => {
     return {
         ingredients: reducerBurger.ingredients,
         totalPrice: reducerBurger.totalPrice,
     };
 };
 
-export default connect(a)(withRouter(ContactPage));
+const mapDispatchToProp = (dispatch) => {
+    return {
+        proceedOrder: (order) => dispatch(proceedOrder(order)),
+    };
+};
+
+export default connect(
+    mapStateToProp,
+    mapDispatchToProp
+)(withRouter(ContactPage));
