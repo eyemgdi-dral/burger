@@ -40,7 +40,7 @@ export const proceedOrder = (order) => {
     return function (dispatch) {
         dispatch(proceedOrderStart());
         axios
-            .post("/orders", order)
+            .post("/orders.json", order)
             .then((response) => {
                 dispatch(proceedOrderSuccess(response));
             })

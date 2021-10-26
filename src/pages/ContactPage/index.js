@@ -1,5 +1,5 @@
 import { Component } from "react";
-import axiosInstance from "../../api/axiosInstance";
+import axios from "../../api/axiosInstance";
 import { Button } from "../../components/General/Button";
 import { Spinner } from "../../components/General/Spinner";
 import { withRouter } from "react-router";
