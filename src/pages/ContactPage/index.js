@@ -12,10 +12,8 @@ class ContactPage extends Component {
         super(props);
         this.state = {
             name: "",
-            name: "",
             city: "",
             street: "",
-            isLoading: false,
         };
     }
     proceedOrder = () => {
@@ -61,7 +59,7 @@ class ContactPage extends Component {
                     placeholder="Your Street"
                     onChange={this.onChangeStreet}
                 />
-                {this.props.isLoading ? (
+                {this.props.newOrder.isLoading ? (
                     <Spinner />
                 ) : (
                     <Button name="Purchase" clicked={this.proceedOrder} />
@@ -71,10 +69,12 @@ class ContactPage extends Component {
     }
 }
 
-const mapStateToProp = ({ reducerBurger }) => {
+const mapStateToProp = (state) => {
     return {
-        ingredients: reducerBurger.ingredients,
-        totalPrice: reducerBurger.totalPrice,
+        ingredients: state.reducerBurger.ingredients,
+        totalPrice: state.reducerBurger.totalPrice,
+        newOrder: state.reducerOrder.newOrder,
+        isLoading: state.reducerOrder.isLoading,
     };
 };
 

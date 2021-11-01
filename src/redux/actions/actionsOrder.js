@@ -42,6 +42,7 @@ export const proceedOrder = (order) => {
         axios
             .post("/orders.json", order)
             .then((response) => {
+                alert("success");
                 dispatch(proceedOrderSuccess(response));
             })
             .catch((error) => {
