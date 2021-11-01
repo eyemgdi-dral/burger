@@ -21,6 +21,7 @@ const reducerAuth = (state = initialState, action) => {
                 isLoading: false,
                 finished: true,
             };
+
         case "LOGIN_ERROR":
             return {
                 ...state,
