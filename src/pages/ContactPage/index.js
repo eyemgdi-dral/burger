@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useEffect } from "react";
 import axios from "../../api/axiosInstance";
 import { Button } from "../../components/General/Button";
 import { Spinner } from "../../components/General/Spinner";
@@ -16,6 +16,15 @@ class ContactPage extends Component {
             street: "",
         };
     }
+
+    componentDidMount() {}
+
+    componentDidUpdate() {
+        if (this.props.newOrder.finished && this.props.newOrder.error != {}) {
+            this.props.history.replace("/order");
+        }
+    }
+
     proceedOrder = () => {
         let address = {
             name: this.state.name,

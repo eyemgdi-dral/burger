@@ -8,7 +8,7 @@ export const Menu = () => {
                 {/* TIP: when passing boolean */}
                 <MenuItem exact name="Home" link="/" />
                 <MenuItem exact name="Login" link="/login" />
-                <MenuItem exact name="Order" link="/order" />
+                <MenuItem exact name="Order" link="/orders" />
                 <MenuItem exact name="Burger" link="/burgerbuilder" />
                 <MenuItem exact name="Checkout" link="/checkout" />
             </ul>

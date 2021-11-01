@@ -8,6 +8,7 @@ import { OrderDetailPage } from "../OrderDetailPage";
 import OrderPage from "../OrderPage";
 import css from "./style.module.css";
 import "./style.css";
+import { LoginPage } from "../LoginPage";
 
 class App extends Component {
     state = {
@@ -33,15 +34,20 @@ class App extends Component {
                     toggleSidebar={this.toggleSidebar}
                 />
                 <main className={css.Content}>
-                    <p>Chosen Ingredient : {this.state.favorite}</p>
                     <Route exact path="/">
                         <BurgerBuilder choose={this.choose} />
                     </Route>
-                    <Route path="/order" component={OrderPage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/orders" component={OrderPage} />
                     <Route path="/burgerbuilder">
+                        <p>Chosen Ingredient : {this.state.favorite}</p>
                         <BurgerBuilder choose={this.choose} />
                     </Route>
-                    <Route path="/orders/:id" component={OrderDetailPage} />
+                    <Route
+                        path="/orders/:id"
+                        exact
+                        component={OrderDetailPage}
+                    />
                     <Route path="/checkout" component={Checkout} />
                 </main>
             </div>
