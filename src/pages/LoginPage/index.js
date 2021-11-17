@@ -61,7 +61,7 @@ const mapStateToProp = (state) => {
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        login: dispatch(login(loginForm)),
+        login: (loginForm) => dispatch(login(loginForm)),
     };
 };
 

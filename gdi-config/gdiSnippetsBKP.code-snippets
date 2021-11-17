@@ -1,0 +1,83 @@
+{
+    "gdi : export function component": {
+        "scope": "javascript,typescript",
+        "prefix": "ef",
+        "body": [
+            "import './style.css';",
+            "",
+            "export const $1 = () => {",
+            "return (",
+            "<div>",
+            "<h1>$1</h1>",
+            "</div>",
+            ");",
+            "}"
+        ],
+        "description": "Initial react function component"
+    },
+    "gdi : export class component": {
+        "scope": "javascript,typescript",
+        "prefix": "ec",
+        "body": [
+            "import { Component } from 'react'",
+            "import './style.css';",
+            "",
+            "export class $1 extends Component {",
+            "constructor(props) {",
+            "super(props);",
+            "this.state = {",
+            "ingredients: {",
+            "salad: 0,",
+            "cheese: 0,",
+            "},",
+            "isLoading: 0,",
+            "purchasing: false,",
+            "};",
+            "}",
+            "render(){",
+            "return (",
+            "<div>",
+            "<h1>$1</h1>",
+            "</div>",
+            ");",
+            "}",
+            "}"
+        ],
+        "description": "Initial react class component"
+    },
+    "gdi : export class": {
+        "scope": "javascript,typescript",
+        "prefix": "log",
+        "body": ["console.log('$1' , $1);", "$2"],
+        "description": "Log output to console"
+    },
+    "gdi : console log": {
+        "scope": "javascript,typescript",
+        "prefix": "log",
+        "body": ["console.log('$1' , $1);", "$2"],
+        "description": "Log output to console"
+    },
+    "gdi : react init": {
+        "scope": "javascript,typescript",
+        "prefix": "start react",
+        "body": [
+            "import React from 'react';",
+            "import { StyleSheet, View, Text } from 'react-native';",
+            "",
+            "export default function () {",
+            "return (",
+            "<View>",
+            "<Text>$1</Text>",
+            "</View>",
+            ");",
+            "}",
+            "",
+            "const styles = StyleSheet.create({",
+            "container: {",
+            "backgroundColor: '#fff',",
+            "},",
+            "});"
+        ],
+        "description": "Log output to console"
+    }
+}

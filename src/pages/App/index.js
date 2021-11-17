@@ -8,7 +8,7 @@ import { OrderDetailPage } from "../OrderDetailPage";
 import OrderPage from "../OrderPage";
 import css from "./style.module.css";
 import "./style.css";
-import { LoginPage } from "../LoginPage";
+import LoginPage from "../LoginPage";
 
 class App extends Component {
     state = {
