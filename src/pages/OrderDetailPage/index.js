@@ -7,44 +7,43 @@ import { getOrder } from "../../redux/actions/actionsOrder";
 import "./style.css";
 
 class OrderDetailPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ingredients: {
-        salad: 0,
-        cheese: 0,
-      },
-      isLoading: 0,
-      purchasing: false,
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            ingredients: {
+                salad: 0,
+                cheese: 0,
+            },
+            isLoading: 0,
+            purchasing: false,
+        };
+    }
 
-  getOrder = () => {};
-  componentDidMount() {
-    this.getOrder();
-  }
-  render() {
-    console.log("props", this.props);
+    componentDidMount() {
+        this.props.getOrder(this.props.match.params.id);
+    }
+    render() {
+        console.log("props", this.props);
 
-    return (
-      <div>
-        <h1>OrderDetailPage {this.props.match.params.id} </h1>
-      </div>
-    );
-  }
+        return (
+            <div>
+                <h1>OrderDetailPage {this.props.match.params.id} </h1>
+            </div>
+        );
+    }
 }
 
 const mapStateToProp = (state) => {
-  return {};
+    return {};
 };
 
 const mapDispatchToProp = (dispatch) => {
-  return {
-    getOrder: (id) => dispatch(getOrder(this.props.match.params.id)),
-  };
+    return {
+        getOrder: (id) => dispatch(getOrder(id)),
+    };
 };
 
 export default connect(
-  mapStateToProp,
-  mapDispatchToProp
+    mapStateToProp,
+    mapDispatchToProp
 )(withRouter(OrderDetailPage));

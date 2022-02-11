@@ -11,44 +11,48 @@ import "./style.css";
 import LoginPage from "../LoginPage";
 
 class App extends Component {
-  state = {
-    showSidebar: false,
-    favorite: "N/A",
-  };
-  //TIP: how to prevState sample
-  toggleSidebar = () => {
-    this.setState((prevState) => {
-      return { showSidebar: !prevState.showSidebar };
-    });
-  };
-  choose = (ingredients) => {
-    console.log("choose works", ingredients);
-    this.setState({ favorite: ingredients });
-  };
-  render() {
-    return (
-      <div className="App">
-        <Toolbar toggleSidebar={this.toggleSidebar} />
-        <Sidebar
-          showSidebar={this.state.showSidebar}
-          toggleSidebar={this.toggleSidebar}
-        />
-        <main className={css.Content}>
-          <Route exact path="/">
-            <BurgerBuilder choose={this.choose} />
-          </Route>
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/orders" component={OrderPage} />
-          <Route path="/burgerbuilder">
-            <p>Chosen Ingredient : {this.state.favorite}</p>
-            <BurgerBuilder choose={this.choose} />
-          </Route>
-          <Route path="/orders/:id" exact component={OrderDetailPage} />
-          <Route path="/checkout" component={Checkout} />
-        </main>
-      </div>
-    );
-  }
+    state = {
+        showSidebar: false,
+        favorite: "N/A",
+    };
+    //TIP: how to prevState sample
+    toggleSidebar = () => {
+        this.setState((prevState) => {
+            return { showSidebar: !prevState.showSidebar };
+        });
+    };
+    choose = (ingredients) => {
+        console.log("choose works", ingredients);
+        this.setState({ favorite: ingredients });
+    };
+    render() {
+        return (
+            <div className="App">
+                <Toolbar toggleSidebar={this.toggleSidebar} />
+                <Sidebar
+                    showSidebar={this.state.showSidebar}
+                    toggleSidebar={this.toggleSidebar}
+                />
+                <main className={css.Content}>
+                    <Route exact path="/">
+                        <BurgerBuilder choose={this.choose} />
+                    </Route>
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/orders" component={OrderPage} />
+                    <Route path="/burgerbuilder">
+                        <p>Chosen Ingredient : {this.state.favorite}</p>
+                        <BurgerBuilder choose={this.choose} />
+                    </Route>
+                    <Route
+                        path="/orders/:id"
+                        exact
+                        component={OrderDetailPage}
+                    />
+                    <Route path="/checkout" component={Checkout} />
+                </main>
+            </div>
+        );
+    }
 }
 
 export default App;
