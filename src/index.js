@@ -17,7 +17,6 @@ const logger = (store) => {
       console.log("Log => current state before ", store.getState());
       const result = next(action);
       console.log("Log => current state after ", store.getState());
-
       return result;
     };
   };
