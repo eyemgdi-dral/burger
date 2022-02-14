@@ -55,7 +55,7 @@ class LoginPage extends Component {
 
 const mapStateToProp = (state) => {
     return {
-        isAuth: state.authReducer.isAuth,
+        isAuth: state.loginPage.isAuth,
     };
 };
 
