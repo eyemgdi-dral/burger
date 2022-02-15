@@ -5,7 +5,7 @@ export const login = (user) => {
         dispatch(loginStart);
 
         axios
-            .post("/login.json")
+            .post("/login.json", user)
             .then((response) => {
                 dispatch(loginSuccess(response));
             })
@@ -15,10 +15,9 @@ export const login = (user) => {
     };
 };
 
-export const loginStart = (user) => {
+export const loginStart = () => {
     return {
         type: "LOGIN_START",
-        user,
     };
 };
 
@@ -32,6 +31,40 @@ export const loginSuccess = (response) => {
 export const loginError = (error) => {
     return {
         type: "LOGIN_ERROR",
+        error,
+    };
+};
+
+export const signup = (user) => {
+    return function (dispatch) {
+        dispatch(signupStart);
+        axios
+            .post("/signup.json", user)
+            .then((response) => {
+                dispatch(signupSuccess(response));
+            })
+            .catch((error) => {
+                dispatch(signupError(error));
+            });
+    };
+};
+
+export const signupStart = () => {
+    return {
+        type: "SIGNUP_START",
+    };
+};
+
+export const signupSuccess = (response) => {
+    return {
+        type: "SIGNUP_SUCCESS",
+        response,
+    };
+};
+
+export const signupError = (error) => {
+    return {
+        type: "SIGNUP_ERROR",
         error,
     };
 };

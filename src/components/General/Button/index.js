@@ -1,3 +1,5 @@
 export const Button = (props) => (
-  <button onClick={props.clicked}>{props.name}</button>
+    <button className="control" onClick={props.clicked}>
+        {props.name}
+    </button>
 );

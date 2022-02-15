@@ -5,6 +5,12 @@ const initialState = {
         isAuth: false,
         user: {},
     },
+    signupPage: {
+        isLoading: false,
+        finished: false,
+        isAuth: false,
+        user: {},
+    },
 };
 const reducerAuth = (state = initialState, action) => {
     switch (action.type) {

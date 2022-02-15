@@ -2,10 +2,10 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
 import { Button } from "../../components/General/Button";
-import { login } from "../../redux/actions/actionsAuth";
+import { signup } from "../../redux/actions/actionsAuth";
 import "./style.css";
 
-class LoginPage extends Component {
+class SignupPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,18 +22,18 @@ class LoginPage extends Component {
         this.setState({ password: e.target.value });
     };
 
-    login = () => {
+    signup = () => {
         const user = {
             userName: this.state.userName,
             password: this.state.password,
         };
-        this.props.login(user);
+        this.props.signup(user);
     };
 
     render() {
         return (
             <div>
-                <h1>LoginPage</h1>
+                <h1>SignupPage</h1>
                 <div>
                     <input
                         className="control"
@@ -57,14 +57,14 @@ class LoginPage extends Component {
 
 const mapStateToProp = ({ reducerAuth }) => {
     return {
-        isAuth: reducerAuth.loginPage.isAuth,
+        isAuth: reducerAuth.signupPage.isAuth,
     };
 };
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        login: (loginForm) => dispatch(login(loginForm)),
+        signup: (loginForm) => dispatch(signup(loginForm)),
     };
 };
 
-export default connect(mapStateToProp, mapDispatchToProp)(LoginPage);
+export default connect(mapStateToProp, mapDispatchToProp)(SignupPage);

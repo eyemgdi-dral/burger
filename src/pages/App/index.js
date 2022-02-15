@@ -9,6 +9,7 @@ import OrderPage from "../OrderPage";
 import css from "./style.module.css";
 import "./style.css";
 import LoginPage from "../LoginPage";
+import SignupPage from "../SignupPage";
 
 class App extends Component {
     state = {
@@ -38,6 +39,7 @@ class App extends Component {
                         <BurgerBuilder choose={this.choose} />
                     </Route>
                     <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/signup" component={SignupPage} />
                     <Route exact path="/orders" component={OrderPage} />
                     <Route path="/burgerbuilder">
                         <p>Chosen Ingredient : {this.state.favorite}</p>
