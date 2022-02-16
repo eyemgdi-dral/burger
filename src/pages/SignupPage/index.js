@@ -11,6 +11,7 @@ class SignupPage extends Component {
         this.state = {
             userName: "",
             password: "",
+            passwordConfirm: "",
         };
     }
 
@@ -22,7 +23,15 @@ class SignupPage extends Component {
         this.setState({ password: e.target.value });
     };
 
+    onPasswordConfirmChange = (e) => {
+        this.setState({ passwordConfirm: e.target.value });
+    };
+
     signup = () => {
+        if (this.state.password != this.state.passwordConfirm) {
+            this.setState({ error: "not same." });
+            return;
+        }
         const user = {
             userName: this.state.userName,
             password: this.state.password,
@@ -48,7 +57,14 @@ class SignupPage extends Component {
                         type="password"
                         placeholder="password"
                     />
-                    <Button name="Login" action={this.login} />
+                    <input
+                        className="control"
+                        onChange={this.onPasswordConfirmChange}
+                        type="password"
+                        placeholder="password"
+                    />
+
+                    <Button name="Signup" action={this.signup} />
                 </div>
             </div>
         );
