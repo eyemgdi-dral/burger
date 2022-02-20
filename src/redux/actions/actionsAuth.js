@@ -1,11 +1,17 @@
-import axios from "../../api/axiosInstance";
+// import axios from "../../api/axiosInstance";
+import axiosAuth from "../../api/axiosAuth";
+import constants from "../../constants/common.json";
 
 export const login = (user) => {
     return function (dispatch) {
-        dispatch(loginStart);
+        dispatch(loginStart());
+        user = {
+            ...user,
+            returnSecureToken: true,
+        };
 
-        axios
-            .post("/login.json", user)
+        axiosAuth
+            .post("/accounts:signInWithPassword?key=" + constants.api.key, user)
             .then((response) => {
                 dispatch(loginSuccess(response));
             })
@@ -36,15 +42,23 @@ export const loginError = (error) => {
 };
 
 export const signup = (user) => {
+    var user = {
+        ...user,
+        returnSecureToken: true,
+    };
     return function (dispatch) {
-        dispatch(signupStart);
-        axios
-            .post("/signup.json", user)
+        dispatch(signupStart());
+        axiosAuth
+            .post("/accounts:signUp?key=" + constants.api.key, user)
             .then((response) => {
+                console.log("=>", response);
                 dispatch(signupSuccess(response));
             })
             .catch((error) => {
-                dispatch(signupError(error));
+                console.log("error", error.response.data.error.message);
+                dispatch(
+                    signupError({ message: error.response.data.error.message })
+                );
             });
     };
 };
@@ -66,5 +80,11 @@ export const signupError = (error) => {
     return {
         type: "SIGNUP_ERROR",
         error,
+    };
+};
+
+export const clearError = () => {
+    return {
+        type: "CLEAR_ERROR",
     };
 };

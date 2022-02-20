@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL:
-        "https://burger-f4559-default-rtdb.asia-southeast1.firebasedatabase.app",
+  baseURL: "https://identitytoolkit.googleapis.com/v1",
 });
 export default axiosInstance;

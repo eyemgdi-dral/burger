@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import { Button } from "../../components/General/Button";
 import { login } from "../../redux/actions/actionsAuth";
@@ -9,13 +10,13 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: "",
+            email: "",
             password: "",
         };
     }
 
-    onUserNameChange = (e) => {
-        this.setState({ userName: e.target.value });
+    onEmailChange = (e) => {
+        this.setState({ email: e.target.value });
     };
 
     onPasswordChange = (e) => {
@@ -24,7 +25,7 @@ class LoginPage extends Component {
 
     login = () => {
         const user = {
-            userName: this.state.userName,
+            email: this.state.email,
             password: this.state.password,
         };
         this.props.login(user);
@@ -33,11 +34,12 @@ class LoginPage extends Component {
     render() {
         return (
             <div>
+                {this.props.isAuth && <Redirect to={"/orders"} />}
                 <h1>LoginPage</h1>
                 <div>
                     <input
                         className="control"
-                        onChange={this.onUserNameChange}
+                        onChange={this.onEmailChange}
                         type="text"
                         placeholder="user name"
                     />
@@ -48,7 +50,7 @@ class LoginPage extends Component {
                         type="password"
                         placeholder="password"
                     />
-                    <Button name="Login" action={this.login} />
+                    <Button name="Login" clicked={this.login} />
                 </div>
             </div>
         );
@@ -57,7 +59,8 @@ class LoginPage extends Component {
 
 const mapStateToProp = ({ reducerAuth }) => {
     return {
-        isAuth: reducerAuth.loginPage.isAuth,
+        isAuth: reducerAuth.isAuth,
+        isLoading: reducerAuth.loginPage.isLoading,
     };
 };
 
