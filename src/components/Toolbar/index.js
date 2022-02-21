@@ -1,6 +1,6 @@
 import { Logo } from "../General/Logo";
 import { Hamburger } from "../Hamburger";
-import { Menu } from "../Menu";
+import Menu from "../Menu";
 import css from "./style.module.css";
 export const Toolbar = (props) => {
     return (

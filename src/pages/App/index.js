@@ -10,6 +10,7 @@ import css from "./style.module.css";
 import "./style.css";
 import LoginPage from "../LoginPage";
 import SignupPage from "../SignupPage";
+import Logout from "../Logout";
 
 class App extends Component {
     state = {
@@ -39,6 +40,7 @@ class App extends Component {
                         <BurgerBuilder choose={this.choose} />
                     </Route>
                     <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/logout" component={Logout} />
                     <Route exact path="/signup" component={SignupPage} />
                     <Route exact path="/orders" component={OrderPage} />
                     <Route path="/burgerbuilder">

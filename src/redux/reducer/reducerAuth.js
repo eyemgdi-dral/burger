@@ -21,6 +21,7 @@ const reducerAuth = (state = initialState, action) => {
     switch (action.type) {
         case "LOGIN_START":
             return {
+                ...state,
                 loginPage: {
                     ...state.loginPage,
                     isLoading: true,
@@ -48,6 +49,7 @@ const reducerAuth = (state = initialState, action) => {
 
         case "LOGIN_ERROR":
             return {
+                ...state,
                 loginPage: {
                     ...state.loginPage,
                     error: action.error,
@@ -60,6 +62,7 @@ const reducerAuth = (state = initialState, action) => {
 
         case "SIGNUP_START":
             return {
+                ...state,
                 loginPage: {
                     ...state.loginPage,
                 },
@@ -87,6 +90,7 @@ const reducerAuth = (state = initialState, action) => {
 
         case "SIGNUP_ERROR":
             return {
+                ...state,
                 loginPage: {
                     ...state.loginPage,
                 },
@@ -99,6 +103,24 @@ const reducerAuth = (state = initialState, action) => {
 
         case "CLEAR_ERROR":
             return {
+                ...state,
+                loginPage: {
+                    ...state.loginPage,
+                },
+                signupPage: {
+                    ...state.signupPage,
+                    error: null,
+                    isLoading: false,
+                },
+            };
+
+        case "LOGOUT":
+            return {
+                ...state,
+                localId: "",
+                token: "",
+                refreshToken: "",
+                isAuth: false,
                 loginPage: {
                     ...state.loginPage,
                 },
