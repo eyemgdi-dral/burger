@@ -7,6 +7,7 @@ const initialState = {
         isLoading: false,
         finished: false,
         isAuth: false,
+        error: null,
         user: {},
     },
     signupPage: {
@@ -122,6 +123,8 @@ const reducerAuth = (state = initialState, action) => {
                 refreshToken: "",
                 isAuth: false,
                 loginPage: {
+                    error: null,
+                    isLoading: false,
                     ...state.loginPage,
                 },
                 signupPage: {

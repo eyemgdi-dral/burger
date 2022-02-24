@@ -16,7 +16,7 @@ export const login = (user) => {
                 dispatch(loginSuccess(response));
             })
             .catch((error) => {
-                dispatch(loginError(error));
+                dispatch(loginError(error.response.data.error.message));
             });
     };
 };

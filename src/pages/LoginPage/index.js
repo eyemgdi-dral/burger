@@ -50,6 +50,8 @@ class LoginPage extends Component {
                         type="password"
                         placeholder="password"
                     />
+                    {this.props.error && <p>{this.props.error}</p>}
+
                     <Button name="Login" clicked={this.login} />
                 </div>
             </div>
@@ -61,6 +63,7 @@ const mapStateToProp = ({ reducerAuth }) => {
     return {
         isAuth: reducerAuth.isAuth,
         isLoading: reducerAuth.loginPage.isLoading,
+        error: reducerAuth.loginPage.error,
     };
 };
 

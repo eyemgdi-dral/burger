@@ -10,13 +10,15 @@ const Menu = (props) => {
         <div>
             <ul className="Menu">
                 {/* TIP: when passing boolean */}
-                <MenuItem exact name="Home" link="/" />
-                <MenuItem exact name="Order" link="/orders" />
-                <MenuItem exact name="Burger" link="/burgerbuilder" />
-                <MenuItem exact name="Checkout" link="/checkout" />
+                {/* <MenuItem exact name="Home" link="/" />
+                <MenuItem exact name="Checkout" link="/checkout" /> */}
 
                 {props.isAuth ? (
-                    <MenuItem exact name="Logout" link="/logout" />
+                    <Fragment>
+                        <MenuItem exact name="Burger" link="/" />
+                        <MenuItem exact name="Order" link="/orders" />
+                        <MenuItem exact name="Logout" link="/logout" />
+                    </Fragment>
                 ) : (
                     <Fragment>
                         <MenuItem exact name="Login" link="/login" />

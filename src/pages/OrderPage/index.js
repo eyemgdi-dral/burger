@@ -16,7 +16,7 @@ class OrderPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getOrders();
+        this.props.getOrders(this.props.localId);
     }
 
     render() {
@@ -51,16 +51,17 @@ class OrderPage extends Component {
     }
 }
 
-const mapStateToProp = ({ reducerOrder }) => {
+const mapStateToProp = ({ reducerOrder, reducerAuth }) => {
     return {
         orders: reducerOrder.orders,
         isLoading: reducerOrder.isLoading,
+        localId: reducerAuth.localId,
     };
 };
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        getOrders: () => dispatch(getOrders()),
+        getOrders: (localId) => dispatch(getOrders(localId)),
     };
 };
 
