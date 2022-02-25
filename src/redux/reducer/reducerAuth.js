@@ -42,9 +42,9 @@ const reducerAuth = (state = initialState, action) => {
                 signupPage: {
                     ...state.signupPage,
                 },
-                idToken: action.response.data.idToken,
-                refreshToken: action.response.data.refreshToken,
-                localId: action.response.data.localId,
+                idToken: action.idToken,
+                // refreshToken: action.response.data.refreshToken,
+                localId: action.localId,
                 isAuth: true,
             };
 

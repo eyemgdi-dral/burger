@@ -1,11 +1,14 @@
 import axios from "../../api/axiosInstance";
 
 export const getOrders = (localId) => {
-    return function (dispatch) {
+    return function (dispatch, getState) {
         dispatch(getOrdersStart());
 
+        const token = getState().reducerAuth.idToken;
         axios
-            .get(`/orders.json?orderBy="localId"&equalTo="${localId}"`)
+            .get(
+                `/orders.json?auth=${token}&orderBy="localId"&equalTo="${localId}"`
+            )
             .then(({ data }) => {
                 //TIP: Extracting from response
                 dispatch(getOrdersSuccess(data));
@@ -37,11 +40,15 @@ export const getOrdersError = (error) => {
 };
 
 export const proceedOrder = (order) => {
-    return function (dispatch) {
+    return function (dispatch, getState) {
         dispatch(proceedOrderStart());
+        const ord = {
+            ...order,
+            auth: getState().reducerAuth.idToken,
+        };
 
         axios
-            .post("/orders.json", order)
+            .post(`/orders.json?auth=${getState().reducerAuth.idToken}`, order)
             .then((response) => {
                 alert("success");
                 dispatch(proceedOrderSuccess(response));

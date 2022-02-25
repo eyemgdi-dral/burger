@@ -12,6 +12,7 @@ import LoginPage from "../LoginPage";
 import SignupPage from "../SignupPage";
 import Logout from "../Logout";
 import { connect } from "react-redux";
+import { loginSuccess } from "../../redux/actions/actionsAuth";
 
 class App extends Component {
     state = {
@@ -28,6 +29,19 @@ class App extends Component {
         console.log("choose works", ingredients);
         this.setState({ favorite: ingredients });
     };
+
+    autoLogin = (idToken, localId) => {
+        this.props.loginSuccess(idToken, localId);
+    };
+
+    componentDidMount() {
+        const idToken = localStorage.getItem("idToken");
+        const localId = localStorage.getItem("localId");
+        if (idToken && localId) {
+            this.autoLogin(idToken, localId);
+        }
+    }
+
     //TIP: Authenticated URL managing shown below
     render() {
         return (
@@ -73,4 +87,11 @@ class App extends Component {
 const mapStateToProps = ({ reducerAuth }) => {
     return { localId: reducerAuth.localId };
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginSuccess: (idToken, localId) =>
+            dispatch(loginSuccess(idToken, localId)),
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

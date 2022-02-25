@@ -13,7 +13,11 @@ export const login = (user) => {
         axiosAuth
             .post("/accounts:signInWithPassword?key=" + constants.api.key, user)
             .then((response) => {
-                dispatch(loginSuccess(response));
+                const idToken = response.data.idToken;
+                const localId = response.data.localId;
+                localStorage.setItem("idToken", idToken);
+                localStorage.setItem("localId", localId);
+                dispatch(loginSuccess(idToken, localId));
             })
             .catch((error) => {
                 dispatch(loginError(error.response.data.error.message));
@@ -27,10 +31,11 @@ export const loginStart = () => {
     };
 };
 
-export const loginSuccess = (response) => {
+export const loginSuccess = (idToken, localId) => {
     return {
         type: "LOGIN_SUCCESS",
-        response,
+        idToken,
+        localId,
     };
 };
 
