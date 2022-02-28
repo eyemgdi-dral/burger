@@ -95,6 +95,8 @@ export const clearError = () => {
 };
 
 export const logout = () => {
+    localStorage.removeItem("idToken");
+    localStorage.removeItem("localId");
     return {
         type: "LOGOUT",
     };
